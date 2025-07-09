@@ -5,8 +5,12 @@ int ft_printf(const char *str, ...)
 {
     int i;
     va_list lst;
+    int total;
 
+    if(!str)
+        return (0);
     i = 0;
+    total = 0;
     va_start(lst, str);
     while (str[i])
     {
@@ -15,24 +19,16 @@ int ft_printf(const char *str, ...)
             i++;
             if(str[i])
             {
-                ft_find_type(str[i], &lst);
+                total += ft_find_type(str[i], &lst);
             }
         }
         else
+        {
             write(1, &str[i], 1);
+            total++;
+        }
         i++;
     }
     va_end(lst);
-    return (1);
+    return (total);
 }
-
-#include <stdio.h>
-
-/*int main()
-{
-    //ft_printf("selam%%%%");
-    //ft_printf("\t");
-    ft_printf("\t");
-    ft_printf("selam%%");
-    ft_printf("\n");
-}*/

@@ -6,8 +6,9 @@
 #include <unistd.h>
 
 int ft_printf(const char *str, ...);
-void ft_find_type(char c, va_list *lst);
+int ft_find_type(char c, va_list *lst);
 char	*ft_itoa(int n);
 char	*ft_uitoa(unsigned int n);
+int ft_put_hex(unsigned long num, int isupper);
 
 #endif
