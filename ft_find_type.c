@@ -6,7 +6,7 @@
 /*   By: zzehra <zzehra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 05:04:09 by zzehra            #+#    #+#             */
-/*   Updated: 2025/07/10 22:57:57 by zzehra           ###   ########.fr       */
+/*   Updated: 2025/07/10 23:13:17 by zzehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 static int	ft_find_type4(char c, va_list *lst)
 {
-	int	count;
+	int				count;
+	unsigned int	num;
 
 	count = 0;
 	if (c == 'x')
 	{
-		unsigned int	num;
-
 		num = va_arg(*lst, unsigned int);
 		count += ft_put_hex(num, 0);
 	}
 	else if (c == 'X')
 	{
-		unsigned int	num;
-
 		num = va_arg(*lst, unsigned int);
 		count += ft_put_hex(num, 1);
 	}
@@ -36,15 +33,14 @@ static int	ft_find_type4(char c, va_list *lst)
 
 static int	ft_find_type3(char c, va_list *lst)
 {
-	int	count;
+	int				count;
+	unsigned int	nb;
+	char			*number;
+	char			*tmp;
 
 	count = 0;
 	if (c == 'u')
 	{
-		unsigned int		nb;
-		char	*number;
-		char	*tmp;
-
 		nb = va_arg(*lst, unsigned int);
 		number = ft_uitoa(nb);
 		tmp = number;
@@ -59,15 +55,14 @@ static int	ft_find_type3(char c, va_list *lst)
 
 static int	ft_find_type2(char c, va_list *lst)
 {
-	int	count;
+	int		count;
+	int		nb;
+	char	*number;
+	char	*tmp;
 
 	count = 0;
 	if (c == 'd' || c == 'i')
 	{
-		int		nb;
-		char	*number;
-		char	*tmp;
-
 		nb = va_arg(*lst, int);
 		number = ft_itoa(nb);
 		tmp = number;
@@ -82,13 +77,13 @@ static int	ft_find_type2(char c, va_list *lst)
 
 static int	ft_find_type1(char c, va_list *lst)
 {
-	int	count;
+	int				count;
+	unsigned long	addr;
+	void			*p;
 
 	count = 0;
 	if (c == 'p')
 	{
-		void		*p;
-		unsigned long	addr;
 		p = va_arg(*lst, void *);
 		addr = (unsigned long)p;
 		write(1, "0x", 2);
@@ -104,19 +99,18 @@ static int	ft_find_type1(char c, va_list *lst)
 
 int	ft_find_type(char c, va_list *lst)
 {
-	int	count;
+	int		count;
+	char	ch;
+	char	*str;
 
 	count = 0;
 	if (c == 'c')
 	{
-		char	ch;
 		ch = va_arg(*lst, int);
 		count += write(1, &ch, 1);
 	}
 	else if (c == 's')
 	{
-		char	*str;
-
 		str = va_arg(*lst, char *);
 		if (!str)
 			return (write(1, "(null)", 6));
