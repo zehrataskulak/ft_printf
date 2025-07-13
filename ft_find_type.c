@@ -6,7 +6,7 @@
 /*   By: zzehra <zzehra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 05:04:09 by zzehra            #+#    #+#             */
-/*   Updated: 2025/07/10 23:13:17 by zzehra           ###   ########.fr       */
+/*   Updated: 2025/07/13 20:19:59 by ztaskula         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ static int	ft_find_type1(char c, va_list *lst)
 	{
 		p = va_arg(*lst, void *);
 		addr = (unsigned long)p;
+		if (addr == 0)
+			return (write(1, "(nil)", 5));
 		write(1, "0x", 2);
 		count += 2;
 		count += ft_put_hex(addr, 0);

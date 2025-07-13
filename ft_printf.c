@@ -6,7 +6,7 @@
 /*   By: zzehra <zzehra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 05:04:15 by zzehra            #+#    #+#             */
-/*   Updated: 2025/07/10 05:04:45 by zzehra           ###   ########.fr       */
+/*   Updated: 2025/07/13 20:20:18 by ztaskula         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ int	ft_printf(const char *str, ...)
 	int		total;
 	va_list	lst;
 
-	if (!str)
-		return (0);
 	i = 0;
 	total = 0;
 	va_start(lst, str);
 	while (str[i])
 	{
-		if (str[i] == '%' && str[i + 1])
+		if (str[i] == '%')
 		{
+			if (str[i + 1] == '\0')
+				return (-1);
 			i++;
 			total += ft_find_type(str[i], &lst);
 		}
