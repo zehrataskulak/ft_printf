@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zzehra <zzehra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ztaskula <ztaskula@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 05:04:15 by zzehra            #+#    #+#             */
-/*   Updated: 2025/07/13 20:20:18 by ztaskula         ###   ########.fr       */
+/*   Updated: 2025/07/20 18:18:50 by ztaskula         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			if (str[i + 1] == '\0')
-				return (-1);
 			i++;
 			total += ft_find_type(str[i], &lst);
 		}
@@ -34,8 +32,6 @@ int	ft_printf(const char *str, ...)
 			total += write(1, &str[i], 1);
 		i++;
 	}
-	if (total < 0)
-		return (-1);
 	va_end(lst);
 	return (total);
 }
