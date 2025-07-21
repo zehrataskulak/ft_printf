@@ -6,7 +6,7 @@
 /*   By: ztaskula <ztaskula@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 05:04:15 by zzehra            #+#    #+#             */
-/*   Updated: 2025/07/20 18:18:50 by ztaskula         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:32:27 by ztaskula         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			total += ft_find_type(str[i], &lst);
+			total += ft_find_type(str[i], lst);
 		}
 		else
 			total += write(1, &str[i], 1);

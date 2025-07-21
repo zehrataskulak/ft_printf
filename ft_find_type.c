@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_type.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zzehra <zzehra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ztaskula <ztaskula@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 05:04:09 by zzehra            #+#    #+#             */
-/*   Updated: 2025/07/13 20:19:59 by ztaskula         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:35:39 by ztaskula         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_find_type4(char c, va_list *lst)
+static int	ft_find_type4(char c, va_list lst)
 {
 	int				count;
 	unsigned int	num;
@@ -20,18 +20,18 @@ static int	ft_find_type4(char c, va_list *lst)
 	count = 0;
 	if (c == 'x')
 	{
-		num = va_arg(*lst, unsigned int);
+		num = va_arg(lst, unsigned int);
 		count += ft_put_hex(num, 0);
 	}
 	else if (c == 'X')
 	{
-		num = va_arg(*lst, unsigned int);
+		num = va_arg(lst, unsigned int);
 		count += ft_put_hex(num, 1);
 	}
 	return (count);
 }
 
-static int	ft_find_type3(char c, va_list *lst)
+static int	ft_find_type3(char c, va_list lst)
 {
 	int				count;
 	unsigned int	nb;
@@ -41,7 +41,7 @@ static int	ft_find_type3(char c, va_list *lst)
 	count = 0;
 	if (c == 'u')
 	{
-		nb = va_arg(*lst, unsigned int);
+		nb = va_arg(lst, unsigned int);
 		number = ft_uitoa(nb);
 		tmp = number;
 		while (*tmp)
@@ -53,7 +53,7 @@ static int	ft_find_type3(char c, va_list *lst)
 	return (count);
 }
 
-static int	ft_find_type2(char c, va_list *lst)
+static int	ft_find_type2(char c, va_list lst)
 {
 	int		count;
 	int		nb;
@@ -63,7 +63,7 @@ static int	ft_find_type2(char c, va_list *lst)
 	count = 0;
 	if (c == 'd' || c == 'i')
 	{
-		nb = va_arg(*lst, int);
+		nb = va_arg(lst, int);
 		number = ft_itoa(nb);
 		tmp = number;
 		while (*tmp)
@@ -75,7 +75,7 @@ static int	ft_find_type2(char c, va_list *lst)
 	return (count);
 }
 
-static int	ft_find_type1(char c, va_list *lst)
+static int	ft_find_type1(char c, va_list lst)
 {
 	int				count;
 	unsigned long	addr;
@@ -84,7 +84,7 @@ static int	ft_find_type1(char c, va_list *lst)
 	count = 0;
 	if (c == 'p')
 	{
-		p = va_arg(*lst, void *);
+		p = va_arg(lst, void *);
 		addr = (unsigned long)p;
 		if (addr == 0)
 			return (write(1, "(nil)", 5));
@@ -99,7 +99,7 @@ static int	ft_find_type1(char c, va_list *lst)
 	return (count);
 }
 
-int	ft_find_type(char c, va_list *lst)
+int	ft_find_type(char c, va_list lst)
 {
 	int		count;
 	char	ch;
@@ -108,12 +108,12 @@ int	ft_find_type(char c, va_list *lst)
 	count = 0;
 	if (c == 'c')
 	{
-		ch = va_arg(*lst, int);
+		ch = va_arg(lst, int);
 		count += write(1, &ch, 1);
 	}
 	else if (c == 's')
 	{
-		str = va_arg(*lst, char *);
+		str = va_arg(lst, char *);
 		if (!str)
 			return (write(1, "(null)", 6));
 		while (*str)
